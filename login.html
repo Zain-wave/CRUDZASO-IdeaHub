@@ -1,0 +1,189 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Login - CRUDZASO IdeaHub</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#a50d0d",
+              "background-light": "#f8f6f6",
+              "background-dark": "#181111", // Deep dark charcoal/reddish-black
+              "card-dark": "#271c1c",
+              "border-dark": "#543b3b",
+            },
+            fontFamily: {
+              display: ["Manrope", "sans-serif"],
+            },
+            backgroundImage: {
+              "subtle-pattern":
+                "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDQwTDQwIDBIMjBMMCAyME00MCA0MFYyMEwwIDQwIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iMC4wNSIgZmlsbD0ibm9uZSIvPjwvZz48L3N2Zz4=')",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Glassmorphism custom styles */
+      .glass-card {
+        background: rgba(30, 20, 20, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      }
+
+      /* Custom glow focus for inputs */
+      .glow-input:focus {
+        box-shadow:
+          0 0 0 1px #a50d0d,
+          0 0 15px -3px rgba(165, 13, 13, 0.4);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col relative overflow-hidden"
+  >
+    <!-- Background Pattern Layer -->
+    <div
+      class="absolute inset-0 z-0 bg-subtle-pattern pointer-events-none opacity-40"
+    ></div>
+    <!-- Decorative background glow -->
+    <div
+      class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px] pointer-events-none z-0"
+    ></div>
+    <div
+      class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-primary/5 blur-[100px] pointer-events-none z-0"
+    ></div>
+    <div class="flex-1 flex items-center justify-center p-4 sm:p-6 z-10">
+      <div
+        class="w-full max-w-[480px] glass-card border border-[#543b3b]/30 rounded-2xl overflow-hidden relative"
+      >
+        <!-- Header Section -->
+        <div class="px-8 pt-10 pb-4 text-center">
+          <div
+            class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-red-900 shadow-lg shadow-primary/20"
+          >
+            <span class="material-symbols-outlined text-white text-2xl"
+              >grid_view</span
+            >
+          </div>
+          <h2 class="text-white text-3xl font-bold tracking-tight mb-2">
+            CRUDZASO IdeaHub
+          </h2>
+          <p class="text-gray-400 text-sm">
+            Welcome back. Please enter your details.
+          </p>
+        </div>
+        <!-- Form Section -->
+        <form class="px-8 py-4 space-y-5">
+          <!-- Email Field -->
+          <div class="space-y-1.5">
+            <label class="block text-sm font-medium text-gray-300" for="email"
+              >Email Address</label
+            >
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <span
+                  class="material-symbols-outlined text-gray-500 text-[20px]"
+                  >mail</span
+                >
+              </div>
+              <input
+                class="glow-input block w-full pl-10 pr-3 py-3 border border-[#543b3b] rounded-lg bg-[#271c1c]/80 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-all duration-300"
+                id="email"
+                placeholder="name@company.com"
+                type="email"
+              />
+            </div>
+          </div>
+          <!-- Password Field -->
+          <div class="space-y-1.5">
+            <label
+              class="block text-sm font-medium text-gray-300"
+              for="password"
+              >Password</label
+            >
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <span
+                  class="material-symbols-outlined text-gray-500 text-[20px]"
+                  >lock</span
+                >
+              </div>
+              <input
+                class="glow-input block w-full pl-10 pr-3 py-3 border border-[#543b3b] rounded-lg bg-[#271c1c]/80 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-all duration-300"
+                id="password"
+                placeholder="••••••••"
+                type="password"
+              />
+            </div>
+          </div>
+          <!-- Forgot Password -->
+          <div class="flex items-center justify-end">
+            <a
+              class="text-sm font-medium text-gray-400 hover:text-primary transition-colors duration-200"
+              href="#"
+              >Forgot password?</a
+            >
+          </div>
+          <!-- Submit Button -->
+          <button
+            class="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-[#181111] transition-all duration-300 transform hover:scale-[1.01] shadow-[0_0_20px_rgba(165,13,13,0.3)]"
+            type="button"
+          >
+            Sign in
+          </button>
+          <div class="relative my-6">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-[#543b3b]/50"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="px-2 bg-transparent text-gray-500">or</span>
+            </div>
+          </div>
+          <!-- Register -->
+          <div class="text-center pb-6">
+            <p class="text-sm text-gray-400">
+              Don't have an account?
+              <a
+                class="font-semibold text-primary hover:text-red-400 transition-colors"
+                href="#"
+                >Sign up</a
+              >
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="absolute bottom-4 w-full text-center z-10 pointer-events-none">
+      <p class="text-xs text-gray-600">
+        © 2026 CRUDZASO IdeaHub.
+      </p>
+    </div>
+  </body>
+</html>
