@@ -54,7 +54,7 @@ function userRegister() {
 
     setSession(newUser)
     saveUsers(usersList)
-    window.location.href = 'ideas.html'
+    window.location.href = 'index.html'
 }
 
 // Event listener para el formulario de registro

@@ -29,7 +29,7 @@ function userLogin() {
     }
 
     setSession(findUser)
-    window.location.href = 'ideas.html'
+    window.location.href = 'index.html'
 
 }
 
