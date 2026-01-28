@@ -17,7 +17,7 @@ export class IdeaManager {
   }
 
   // Crear una nueva idea
-  createIdea(title, category, description) {
+  createIdea(title, category, description, imageUrl = null) {
     if (!title.trim() || !description.trim()) {
       throw new Error('Title and description are required');
     }
@@ -33,7 +33,7 @@ export class IdeaManager {
       comments: 0,
       createdAt: new Date().toISOString(),
       status: 'new',
-      image: this.getRandomCategoryImage(category)
+      image: imageUrl && imageUrl.trim() ? imageUrl.trim() : null
     };
 
     this.ideas.unshift(newIdea);
@@ -53,17 +53,7 @@ export class IdeaManager {
     return `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=1a1a1a&color=a50d0d&size=128`;
   }
 
-  // Obtener imagen aleatoria según la categoría
-  getRandomCategoryImage(category) {
-    const categoryImages = {
-      'Product': 'https://picsum.photos/seed/product/400/300.jpg',
-      'Improvement': null, // Algunas tarjetas no tienen imágenes
-      'Experiment': 'https://picsum.photos/seed/experiment/400/300.jpg',
-      'Other': 'https://picsum.photos/seed/other/400/300.jpg'
-    };
-    
-    return categoryImages[category] || null;
-  }
+  
 
   // Guardar ideas en el almacenamiento
   saveIdeas() {

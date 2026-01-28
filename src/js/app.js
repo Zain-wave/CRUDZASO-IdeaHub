@@ -92,8 +92,9 @@ export class App {
       const title = this.form.querySelector('#idea-title').value;
       const category = this.form.querySelector('#category').value;
       const description = this.form.querySelector('#description').value;
+      const imageUrl = this.form.querySelector('#image').value;
       
-      const newIdea = this.ideaManager.createIdea(title, category, description);
+      const newIdea = this.ideaManager.createIdea(title, category, description, imageUrl);
       
       // Renderizar la nueva tarjeta
       this.cardRenderer.renderCard(newIdea, 'prepend');
