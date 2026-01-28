@@ -1,4 +1,10 @@
-import { getUsers, saveUsers, setSession, generateId } from "./storage.js";
+import { getUsers, saveUsers, setSession, generateId, getSession } from "./storage.js";
+
+// Verificar si el usuario ya está logueado
+const currentUser = getSession();
+if (currentUser) {
+    window.location.href = 'index.html';
+}
 
 const registerForm = document.getElementById("register-form");
 const usersList = getUsers() || []
