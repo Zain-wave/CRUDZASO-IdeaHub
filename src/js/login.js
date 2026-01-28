@@ -3,6 +3,7 @@ import { getUsers, setSession } from "./storage.js";
 const loginForm = document.getElementById("login-form")
 const usersList = getUsers() || []
 
+// Función para iniciar sesión del usuario
 function userLogin() {
     const userEmail = document.getElementById("input-email").value;
     const userPassword = document.getElementById("input-password").value;
@@ -32,6 +33,7 @@ function userLogin() {
 
 }
 
+// Event listener para el formulario de login
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     userLogin()

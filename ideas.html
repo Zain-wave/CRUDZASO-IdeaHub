@@ -25,12 +25,12 @@
           extend: {
             colors: {
               primary: "#a50d0d",
-              "background-light": "#f8f6f6", 
+              "background-light": "#f8f6f6",
               "background-dark": "#0f0f0f",
               "surface-dark": "#1a1a1a",
               "surface-dark-hover": "#262626",
-              "border-dark": "#332222", 
-              "input-bg": "#2a2a2a", 
+              "border-dark": "#332222",
+              "input-bg": "#2a2a2a",
             },
             fontFamily: {
               display: ["Manrope", "sans-serif"],
@@ -67,7 +67,7 @@
   <body
     class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display min-h-screen flex flex-col overflow-hidden relative"
   >
-    <!-- Modal pa crear -->
+    <!-- Modal para crear nuevas ideas -->
     <div
       id="ideaModal"
       class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-overlay bg-black/60 hidden"
@@ -205,28 +205,35 @@
               class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20 cursor-pointer hover:border-primary transition-colors"
               data-alt="User profile avatar"
             ></div>
-            <!-- Dropdown Menu -->
+            <!-- Menú desplegable del perfil -->
             <div
               id="profileDropdown"
               class="absolute right-0 top-12 w-48 bg-surface-dark border border-[#392828] rounded-lg shadow-lg hidden z-50"
             >
               <div class="py-2">
                 <div class="px-4 py-2 border-b border-[#392828]">
-                  <p id="profileUsername" class="text-white text-sm font-medium"></p>
+                  <p
+                    id="profileUsername"
+                    class="text-white text-sm font-medium"
+                  ></p>
                   <p id="profileEmail" class="text-gray-400 text-xs"></p>
                 </div>
                 <button
                   id="profileBtn"
                   class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-surface-dark-hover hover:text-white transition-colors flex items-center gap-2"
                 >
-                  <span class="material-symbols-outlined text-[18px]">person</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    >person</span
+                  >
                   Profile
                 </button>
                 <button
                   id="logoutBtn"
                   class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-surface-dark-hover hover:text-white transition-colors flex items-center gap-2"
                 >
-                  <span class="material-symbols-outlined text-[18px]">logout</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    >logout</span
+                  >
                   Log out
                 </button>
               </div>
@@ -236,7 +243,7 @@
       </div>
     </header>
     <div class="flex flex-1 overflow-hidden">
-      <!-- Sidebar panel de filtros-->
+      <!-- Panel lateral de filtros -->
       <aside
         class="w-64 hidden lg:flex flex-col border-r border-[#392828] bg-surface-dark overflow-y-auto"
       >
@@ -426,12 +433,10 @@
           </div>
         </div>
       </aside>
-      <!-- Area principal de contenido -->
       <main
         class="flex-1 overflow-y-auto bg-background-dark p-4 md:p-8 relative"
       >
         <div class="max-w-[1200px] mx-auto">
-          <!-- Feed Cabezera-->
           <div
             class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4"
           >
@@ -461,13 +466,13 @@
               </div>
             </div>
           </div>
-          <!-- Ideas -->
+          <!-- Grid de ideas -->
           <div
             class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 pb-12"
           ></div>
         </div>
       </main>
-      <!-- Boton de + para los moviles-->
+      <!-- Botón flotante para dispositivos móviles -->
       <button
         class="md:hidden fixed bottom-6 right-6 size-14 rounded-full bg-primary text-white shadow-lg flex items-center justify-center z-50 hover:bg-[#8a0a0a] active:scale-95 transition-all"
       >

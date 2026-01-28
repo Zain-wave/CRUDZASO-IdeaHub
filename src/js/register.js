@@ -3,6 +3,7 @@ import { getUsers, saveUsers, setSession, generateId } from "./storage.js";
 const registerForm = document.getElementById("register-form");
 const usersList = getUsers() || []
 
+// Función para registrar un nuevo usuario
 function userRegister() {
     const username = document.getElementById("input-username").value;
     const userRegEmail = document.getElementById("input-email").value;
@@ -56,6 +57,7 @@ function userRegister() {
     window.location.href = 'ideas.html'
 }
 
+// Event listener para el formulario de registro
 registerForm.addEventListener('submit', (e) => {
     e.preventDefault();
     userRegister()

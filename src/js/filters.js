@@ -1,4 +1,3 @@
-//import { getIdeas } from "./ideas.js"
 import { getSession } from "./auth.js";
 
 import { getAllIdeas } from "./ideas.js";
@@ -10,6 +9,7 @@ const container = document.getElementById("ideasContainer");
 
 const categoryFilter = document.getElementById("categoryFilter");
 
+// Event listener para el filtro de categorías
 categoryFilter.addEventListener("change", () => {
   const selectedCategory = categoryFilter.value;
 
@@ -27,8 +27,10 @@ categoryFilter.addEventListener("change", () => {
 
 const authorFilter = document.getElementById("authorFilter");
 
+// Obtener lista de autores únicos
 const authors = [...new Set(ideas.map((idea) => idea.authorName))];
 
+// Crear opciones para el filtro de autores
 authors.forEach((author) => {
   const option = document.createElement("option");
   option.value = author;
@@ -36,6 +38,7 @@ authors.forEach((author) => {
   authorFilter.appendChild(option);
 });
 
+// Event listener para el filtro de autores
 authorFilter.addEventListener("change", () => {
   const selectedAuthor = authorFilter.value;
 
@@ -51,6 +54,7 @@ authorFilter.addEventListener("change", () => {
   renderIdeas(filteredIdeas);
 });
 
+// Event listener para acciones en las tarjetas
 container.addEventListener("click", (event) => {
   if (event.target.classList.contains("delete-btn")) {
     const ideaId = event.target.dataset.id;

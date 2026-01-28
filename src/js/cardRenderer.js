@@ -1,11 +1,13 @@
 import { IdeaManager } from './ideaManager.js';
 
+// Clase para renderizar las tarjetas de ideas
 export class CardRenderer {
   constructor(ideaManager) {
     this.ideaManager = ideaManager;
     this.gridContainer = document.querySelector('.grid');
   }
 
+  // Obtener color según la categoría
   getCategoryColor(category) {
     const colors = {
       'Product': 'bg-primary/90 text-white shadow-sm backdrop-blur-sm',
@@ -16,6 +18,7 @@ export class CardRenderer {
     return colors[category] || colors['Other'];
   }
 
+  // Formatear fecha relativa
   formatDate(dateString) {
     const date = new Date(dateString);
     const now = new Date();
@@ -30,6 +33,7 @@ export class CardRenderer {
     return date.toLocaleDateString();
   }
 
+  // Crear HTML de la tarjeta
   createCardHTML(idea) {
     const hasImage = idea.image;
     const categoryColor = this.getCategoryColor(idea.category);
@@ -83,13 +87,14 @@ export class CardRenderer {
     `;
   }
 
+  // Renderizar una tarjeta individual
   renderCard(idea, position = 'prepend') {
     const cardHTML = this.createCardHTML(idea);
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = cardHTML.trim();
     const card = tempDiv.firstElementChild;
 
-    // Add event listeners
+    // Agregar event listeners
     this.addCardEventListeners(card, idea);
 
     if (position === 'prepend') {
@@ -98,7 +103,7 @@ export class CardRenderer {
       this.gridContainer.appendChild(card);
     }
 
-    // Add animation
+    // Agregar animación
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     requestAnimationFrame(() => {
@@ -108,6 +113,7 @@ export class CardRenderer {
     });
   }
 
+  // Renderizar todas las tarjetas
   renderAllCards(ideas) {
     this.gridContainer.innerHTML = '';
     ideas.forEach(idea => {
@@ -115,8 +121,9 @@ export class CardRenderer {
     });
   }
 
+  // Agregar event listeners a la tarjeta
   addCardEventListeners(card, idea) {
-    // Vote button
+    // Botón de voto
     const voteBtn = card.querySelector('[data-action="vote"]');
     if (voteBtn) {
       voteBtn.addEventListener('click', () => {
@@ -125,7 +132,7 @@ export class CardRenderer {
           const voteCount = voteBtn.querySelector('.text-xs.font-bold');
           voteCount.textContent = newVotes;
           
-          // Add animation
+          // Agregar animación
           voteBtn.classList.add('text-primary', 'scale-110');
           setTimeout(() => {
             voteBtn.classList.remove('scale-110');
@@ -134,7 +141,7 @@ export class CardRenderer {
       });
     }
 
-    // Comment button
+    // Botón de comentario
     const commentBtn = card.querySelector('[data-action="comment"]');
     if (commentBtn) {
       commentBtn.addEventListener('click', () => {
@@ -147,6 +154,7 @@ export class CardRenderer {
     }
   }
 
+  // Actualizar contadores de la tarjeta
   updateCardCounts(ideaId, votes, comments) {
     const card = document.querySelector(`[data-idea-id="${ideaId}"]`);
     if (!card) return;

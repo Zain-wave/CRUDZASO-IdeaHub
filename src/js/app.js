@@ -12,6 +12,7 @@ export class App {
     this.init();
   }
 
+  // Método de inicialización de la aplicación
   init() {
     this.currentUser = getSession();
     this.setupModal();
@@ -20,50 +21,51 @@ export class App {
     this.loadExistingIdeas();
   }
 
+  // Configuración del modal para crear nuevas ideas
   setupModal() {
     this.modal = document.getElementById('ideaModal');
     this.form = this.modal.querySelector('form');
     
-    // Get all buttons with "New Idea" text
+    // Obtener todos los botones con el texto "New Idea"
     const newIdeaBtns = Array.from(document.querySelectorAll('button')).filter(btn => 
       btn.textContent.includes('New Idea')
     );
 
-    // Add click event to all "New Idea" buttons
+    // Agregar evento click a todos los botones "New Idea"
     newIdeaBtns.forEach(btn => {
       btn.addEventListener('click', () => this.openModal());
     });
   }
 
   setupEventListeners() {
-    // Close modal events
+    // Eventos para cerrar el modal
     const closeModalBtn = document.getElementById('closeModal');
     const cancelBtn = document.getElementById('cancelBtn');
     
     closeModalBtn.addEventListener('click', () => this.closeModal());
     cancelBtn.addEventListener('click', () => this.closeModal());
     
-    // Close modal on overlay click
+    // Cerrar modal al hacer clic en el overlay
     this.modal.addEventListener('click', (e) => {
       if (e.target === this.modal) {
         this.closeModal();
       }
     });
     
-    // Close modal on Escape key
+    // Cerrar modal con la tecla Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !this.modal.classList.contains('hidden')) {
         this.closeModal();
       }
     });
     
-    // Form submission
+    // Envío del formulario
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.handleFormSubmit();
     });
     
-    // Submit button click handler
+    // Manejador del botón de envío
     const submitBtn = this.form.querySelector('button[type="button"]:last-child');
     submitBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -71,17 +73,20 @@ export class App {
     });
   }
 
+  // Abrir el modal
   openModal() {
     this.modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
   }
 
+  // Cerrar el modal
   closeModal() {
     this.modal.classList.add('hidden');
     document.body.style.overflow = 'auto';
     this.form.reset();
   }
 
+  // Manejar el envío del formulario
   handleFormSubmit() {
     try {
       const title = this.form.querySelector('#idea-title').value;
@@ -90,13 +95,13 @@ export class App {
       
       const newIdea = this.ideaManager.createIdea(title, category, description);
       
-      // Render the new card
+      // Renderizar la nueva tarjeta
       this.cardRenderer.renderCard(newIdea, 'prepend');
       
-      // Show success message
+      // Mostrar mensaje de éxito
       this.showSuccessMessage('Idea created successfully!');
       
-      // Close modal
+      // Cerrar modal
       this.closeModal();
       
     } catch (error) {
@@ -104,6 +109,7 @@ export class App {
     }
   }
 
+  // Configuración del perfil de usuario
   setupUserProfile() {
     const userAvatar = document.getElementById('userAvatar');
     const profileDropdown = document.getElementById('profileDropdown');
@@ -117,27 +123,27 @@ export class App {
       return;
     }
 
-    // Set user avatar and profile info
+    // Configurar avatar e información del perfil
     const avatarUrl = this.getUserAvatar();
     userAvatar.style.backgroundImage = `url('${avatarUrl}')`;
     
     if (profileUsername) profileUsername.textContent = this.currentUser.username;
     if (profileEmail) profileEmail.textContent = this.currentUser.email;
 
-    // Toggle dropdown on avatar click
+    // Alternar dropdown al hacer clic en el avatar
     userAvatar.addEventListener('click', (e) => {
       e.stopPropagation();
       profileDropdown.classList.toggle('hidden');
     });
 
-    // Close dropdown when clicking outside
+    // Cerrar dropdown al hacer clic fuera
     document.addEventListener('click', (e) => {
       if (!profileDropdown.contains(e.target) && e.target !== userAvatar) {
         profileDropdown.classList.add('hidden');
       }
     });
 
-    // Profile button
+    // Botón de perfil
     if (profileBtn) {
       profileBtn.addEventListener('click', () => {
         profileDropdown.classList.add('hidden');
@@ -145,33 +151,36 @@ export class App {
       });
     }
 
-    // Logout functionality
+    // Funcionalidad de logout
     logoutBtn.addEventListener('click', () => {
       profileDropdown.classList.add('hidden');
       this.handleLogout();
     });
   }
 
+  // Obtener avatar del usuario
   getUserAvatar() {
     if (this.currentUser?.avatar) {
       return this.currentUser.avatar;
     }
     
-    // Generate avatar using username
+    // Generar avatar usando el nombre de usuario
     const avatarSeed = this.currentUser?.username || 'anonymous';
     return `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=1a1a1a&color=a50d0d&size=128`;
   }
 
+  // Manejar el cierre de sesión
   handleLogout() {
     clearSession();
     this.showToast('Logging out...', 'info');
     
-    // Redirect to login after a short delay
+    // Redirigir al login después de un corto retraso
     setTimeout(() => {
       window.location.href = 'login.html';
     }, 1000);
   }
 
+  // Cargar ideas existentes
   loadExistingIdeas() {
     const ideas = this.ideaManager.loadIdeas();
     if (ideas.length > 0) {
@@ -179,20 +188,23 @@ export class App {
     }
   }
 
+  // Mostrar mensaje de éxito
   showSuccessMessage(message) {
     this.showToast(message, 'success');
   }
 
+  // Mostrar mensaje de error
   showErrorMessage(message) {
     this.showToast(message, 'error');
   }
 
+  // Mostrar notificación toast
   showToast(message, type = 'info') {
-    // Create toast element
+    // Crear elemento toast
     const toast = document.createElement('div');
     toast.className = `fixed top-4 right-4 z-[200] px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full`;
     
-    // Set colors based on type
+    // Configurar colores según el tipo
     if (type === 'success') {
       toast.className += ' bg-green-600 text-white';
     } else if (type === 'error') {
@@ -203,15 +215,15 @@ export class App {
     
     toast.textContent = message;
     
-    // Add to DOM
+    // Agregar al DOM
     document.body.appendChild(toast);
     
-    // Animate in
+    // Animación de entrada
     requestAnimationFrame(() => {
       toast.classList.remove('translate-x-full');
     });
     
-    // Remove after 3 seconds
+    // Eliminar después de 3 segundos
     setTimeout(() => {
       toast.classList.add('translate-x-full');
       setTimeout(() => {
@@ -221,7 +233,7 @@ export class App {
   }
 }
 
-// Initialize app when DOM is ready
+// Inicializar aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
   window.app = new App();
 });
