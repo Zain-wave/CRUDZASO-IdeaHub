@@ -32,6 +32,37 @@ export function saveIdeas(ideas) {
   saveData(IDEA_DB, ideas);
 }
 
+export function addIdea(idea) {
+  const ideas = getIdeas();
+  ideas.unshift(idea);
+  saveData(IDEA_DB, ideas);
+  return idea;
+}
+
+export function updateIdea(ideaId, updates) {
+  const ideas = getIdeas();
+  const index = ideas.findIndex(idea => idea.id === ideaId);
+  
+  if (index !== -1) {
+    ideas[index] = { ...ideas[index], ...updates };
+    saveData(IDEA_DB, ideas);
+    return ideas[index];
+  }
+  return null;
+}
+
+export function deleteIdeaById(ideaId) {
+  const ideas = getIdeas();
+  const index = ideas.findIndex(idea => idea.id === ideaId);
+  
+  if (index !== -1) {
+    const deletedIdea = ideas.splice(index, 1)[0];
+    saveData(IDEA_DB, ideas);
+    return deletedIdea;
+  }
+  return null;
+}
+
 // Manejo de sesión
 export function getSession() {
   const session = localStorage.getItem(SESSION_DB);
