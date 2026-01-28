@@ -4,6 +4,10 @@ export class IdeaManager {
   constructor() {
     this.ideas = this.loadIdeas();
     this.currentUser = getSession();
+    
+    if (!this.currentUser) {
+      window.location.href = 'login.html';
+    }
   }
 
   loadIdeas() {
@@ -20,7 +24,7 @@ export class IdeaManager {
       title: title.trim(),
       category: category,
       description: description.trim(),
-      author: this.currentUser?.name || 'Anonymous',
+      author: this.currentUser?.username || 'Anonymous',
       authorAvatar: this.getUserAvatar(),
       votes: 0,
       comments: 0,
@@ -40,8 +44,8 @@ export class IdeaManager {
       return this.currentUser.avatar;
     }
     
-    // Generate random avatar if none exists
-    const avatarSeed = this.currentUser?.name || 'anonymous';
+    // Generate avatar using username
+    const avatarSeed = this.currentUser?.username || 'anonymous';
     return `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=1a1a1a&color=a50d0d&size=128`;
   }
 

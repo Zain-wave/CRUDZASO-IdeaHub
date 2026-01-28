@@ -3,6 +3,11 @@ const USER_DB = 'app_users';
 const IDEA_DB = 'app_ideas';
 const SESSION_DB = 'app_session';
 
+// Generador de IDs únicos
+export function generateId() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
 // Helper para leer datos
 function readData(key) {
   const data = localStorage.getItem(key);
@@ -72,7 +77,7 @@ export function getSession() {
 export function setSession(user) {
   const sessionData = {
     id: user.id,
-    name: user.name,
+    username: user.username,
     email: user.email
   };
   localStorage.setItem(SESSION_DB, JSON.stringify(sessionData));

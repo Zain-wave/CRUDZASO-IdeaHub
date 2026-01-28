@@ -199,13 +199,39 @@
           >
             <span class="truncate">New Idea</span>
           </button>
-          <div
-            class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20 cursor-pointer hover:border-primary transition-colors"
-            data-alt="User profile avatar showing a professional smiling"
-            style="
-              background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCEXgdpwZcXFSP37igv__r5Qp2tb_TPHEtxSkF6h5sbUjQErd1-fdGIYR2O9lr5Y-8nBKkvh4AHJ8J-lS-uKgXEbhNBZ-gPqCZKK6hoZsm1RSBBldHB25LyJiCAitBatalBbTj9hkAFyyiy0KNPyQOwJvOCb-OlxaxDXY_KcdTh8Kpzo3dzFIhcwBJphjHlwZnh7QtzRlv9F3ox48OMWCR12gW-xPxWEJi6u73iH73yjhsbcqcF0IX3A_CheON5cdcHeWOzr9jK0uc&quot;);
-            "
-          ></div>
+          <div class="relative">
+            <div
+              id="userAvatar"
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20 cursor-pointer hover:border-primary transition-colors"
+              data-alt="User profile avatar"
+            ></div>
+            <!-- Dropdown Menu -->
+            <div
+              id="profileDropdown"
+              class="absolute right-0 top-12 w-48 bg-surface-dark border border-[#392828] rounded-lg shadow-lg hidden z-50"
+            >
+              <div class="py-2">
+                <div class="px-4 py-2 border-b border-[#392828]">
+                  <p id="profileUsername" class="text-white text-sm font-medium"></p>
+                  <p id="profileEmail" class="text-gray-400 text-xs"></p>
+                </div>
+                <button
+                  id="profileBtn"
+                  class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-surface-dark-hover hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <span class="material-symbols-outlined text-[18px]">person</span>
+                  Profile
+                </button>
+                <button
+                  id="logoutBtn"
+                  class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-surface-dark-hover hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <span class="material-symbols-outlined text-[18px]">logout</span>
+                  Log out
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>

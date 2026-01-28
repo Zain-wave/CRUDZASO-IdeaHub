@@ -1,5 +1,6 @@
 import { IdeaManager } from './ideaManager.js';
 import { CardRenderer } from './cardRenderer.js';
+import { getSession, clearSession } from './storage.js';
 
 export class App {
   constructor() {
@@ -12,8 +13,10 @@ export class App {
   }
 
   init() {
+    this.currentUser = getSession();
     this.setupModal();
     this.setupEventListeners();
+    this.setupUserProfile();
     this.loadExistingIdeas();
   }
 
@@ -99,6 +102,74 @@ export class App {
     } catch (error) {
       this.showErrorMessage(error.message);
     }
+  }
+
+  setupUserProfile() {
+    const userAvatar = document.getElementById('userAvatar');
+    const profileDropdown = document.getElementById('profileDropdown');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const profileBtn = document.getElementById('profileBtn');
+    const profileUsername = document.getElementById('profileUsername');
+    const profileEmail = document.getElementById('profileEmail');
+
+    if (!this.currentUser) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    // Set user avatar and profile info
+    const avatarUrl = this.getUserAvatar();
+    userAvatar.style.backgroundImage = `url('${avatarUrl}')`;
+    
+    if (profileUsername) profileUsername.textContent = this.currentUser.username;
+    if (profileEmail) profileEmail.textContent = this.currentUser.email;
+
+    // Toggle dropdown on avatar click
+    userAvatar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      profileDropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!profileDropdown.contains(e.target) && e.target !== userAvatar) {
+        profileDropdown.classList.add('hidden');
+      }
+    });
+
+    // Profile button
+    if (profileBtn) {
+      profileBtn.addEventListener('click', () => {
+        profileDropdown.classList.add('hidden');
+        this.showToast('Profile feature coming soon!', 'info');
+      });
+    }
+
+    // Logout functionality
+    logoutBtn.addEventListener('click', () => {
+      profileDropdown.classList.add('hidden');
+      this.handleLogout();
+    });
+  }
+
+  getUserAvatar() {
+    if (this.currentUser?.avatar) {
+      return this.currentUser.avatar;
+    }
+    
+    // Generate avatar using username
+    const avatarSeed = this.currentUser?.username || 'anonymous';
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarSeed)}&background=1a1a1a&color=a50d0d&size=128`;
+  }
+
+  handleLogout() {
+    clearSession();
+    this.showToast('Logging out...', 'info');
+    
+    // Redirect to login after a short delay
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 1000);
   }
 
   loadExistingIdeas() {
