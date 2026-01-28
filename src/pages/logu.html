@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideas</title>
+    <link rel="stylesheet" href="../styling/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-section">
+                <img src="./src/assets/icons/initial-icon.png" alt="Logo">
+                <h1>Ideas App</h1>
+            </div>
+            
+            <nav>
+                <a href="../pages/profile.html">Home</a>
+                <a href="#">My Ideas</a>
+                <button id="profile-btn" class="profile-btn">
+                    <div class="user-avatar">
+                        <span id="user-initial">U</span>
+                    </div>
+                    <span>▼</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <button id="close-modal" class="close-btn">×</button>
+            
+            <div class="modal-avatar">
+                <span id="modal-user-initial">U</span>
+            </div>
+            
+            <h2 id="modal-username">Username</h2>
+            <p id="modal-email">email@example.com</p>
+
+            <div class="modal-info">
+                <div class="info-row">
+                    <span>User ID:</span>
+                    <span id="modal-userid">#000</span>
+                </div>
+                <div class="info-row">
+                    <span>Status:</span>
+                    <span class="active">Active</span>
+                </div>
+            </div>
+
+            <button id="logout-btn" class="logout-btn">Logout</button>
+        </div>
+    </div>
+
+    <main>
+        <div class="card">
+            <h2> App</h2>
+            <p> Add</p>
+        </div>
+    </main>
+
+    <script src="../js/ideas-bundle.js"></script>
+</body>
+</html>
