@@ -1,31 +1,65 @@
-export const storage = {
-  getUsers() {
-    const users = localStorage.getItem("app_users");
-    return users ? JSON.parse(users) : [];
-  },
+// Claves para localStorage
+const USER_DB = 'app_users';
+const IDEA_DB = 'app_ideas';
+const SESSION_DB = 'app_session';
 
-  saveUsers(users) {
-    localStorage.setItem("app_users", JSON.stringify(users));
-  },
+// Helper para leer datos
+function readData(key) {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : [];
+}
 
-  getIdeas() {
-    const ideas = localStorage.getItem("app_ideas");
-    return ideas ? JSON.parse(ideas) : [];
-  },
+// Helper para guardar datos
+function saveData(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
 
-  saveIdeas(ideas) {
-    localStorage.setItem("app_ideas", JSON.stringify(ideas));
-  },
+// Manejo de usuarios
+export function getUsers() {
+  return readData(USER_DB);
+}
 
-  getSession() {
-    return localStorage.getItem("app_session");
-  },
+export function saveUsers(users) {
+  saveData(USER_DB, users);
+}
 
-  saveSession(session) {
-    localStorage.setItem("app_session", session);
-  },
+// Manejo de ideas
+export function getIdeas() {
+  return readData(IDEA_DB);
+}
 
-  clearSession() {
-    localStorage.removeItem("app_session");
-  },
-};
+export function saveIdeas(ideas) {
+  saveData(IDEA_DB, ideas);
+}
+
+// Manejo de sesión
+export function getSession() {
+  const session = localStorage.getItem(SESSION_DB);
+  return session ? JSON.parse(session) : null;
+}
+
+export function setSession(user) {
+  const sessionData = {
+    id: user.id,
+    name: user.name,
+    email: user.email
+  };
+  localStorage.setItem(SESSION_DB, JSON.stringify(sessionData));
+}
+
+export function clearSession() {
+  localStorage.removeItem(SESSION_DB);
+}
+
+export function generateId() {
+  let lastId = localStorage.getItem("lastUserId");
+
+  if (!lastId) {
+    lastId = 0;
+  }
+
+  const newId = Number(lastId) + 1;
+  localStorage.setItem("lastUserId", newId);
+
+  return newId;
+}
